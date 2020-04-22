@@ -13,11 +13,11 @@ class TodoList extends Component {
 
 
     render() {
-        const {todoList , onMarkDone} = this.props;
+        const {todoList , onMarkDone, onDelete} = this.props;
         return (
             <div>
                 {todoList.map((todo)=>(
-                    <Todo key={todo.id} todo={todo} onMarkDone={onMarkDone} />
+                    <Todo key={todo.id} todo={todo} onMarkDone={onMarkDone} onDelete={onDelete} />
                 ))}
             </div>
         )

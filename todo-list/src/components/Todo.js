@@ -6,11 +6,12 @@ class Todo extends Component {
         super(props)
     
         this.state = {
-            isStrikeThrough:true,
+            isStrikeThrough:false,
         }
 
         this.onClickDone = this.onClickDone.bind(this);
         this.onMarkDone = this.onMarkDone.bind(this);
+        this.onDelete = this.onDelete.bind(this);
     }
     
     onClickDone() {
@@ -32,14 +33,22 @@ class Todo extends Component {
 
     }
 
+    onDelete() {
+        const todo = this.props.todo;
+        console.log("byreeeeee");
+        this.props.onDelete(todo);
+    }
+
     render() {
         const todo = this.props.todo;
         return (
-            <div onClick={this.onClickDone}><li style={{
+            <div>
+            <div onClick={this.onClickDone}><span style={{
                 textDecoration: this.state.isStrikeThrough ? 'line-through' : 'none',
               }}>
                 {todo.content}
-                </li>
+                </span><button onClick={this.onDelete}> x </button>
+            </div>
             </div>
         )
     }

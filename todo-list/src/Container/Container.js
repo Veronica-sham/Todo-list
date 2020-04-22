@@ -8,6 +8,7 @@ class Container extends Component {
       super(props);
 
       this.onMarkDone = this.onMarkDone.bind(this);
+      this.onDelete = this.onDelete.bind(this);
       this.state = {
         todoList: INIT_TODOS,
       };
@@ -31,13 +32,26 @@ class Container extends Component {
     }
 
 
+    onDelete(todo){
+      const indexOfItem = this.state.todoList.indexOf(todo);
+      this.state.todoList.splice(indexOfItem,1);
+      console.log(this.state.todoList);
+      this.setState((prevState) => {
+        return {
+          todoList: this.state.todoList
+        };
+      });
+
+    }
+
+
     render() {
 
   
       return (
         <div>
             TodoContainer
-            <TodoList todoList={INIT_TODOS} onMarkDone={this.onMarkDone}/>
+            <TodoList todoList={INIT_TODOS} onMarkDone={this.onMarkDone} onDelete={this.onDelete}/>
         </div>
       );
     }

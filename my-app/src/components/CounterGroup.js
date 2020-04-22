@@ -5,6 +5,7 @@ import {
   COUNTER_GROUP_INIT_SUM,
 } from "../constants/constants";
 import propTypes from "prop-types";
+import CounterApi from "../apis/CounterApi";
 
 class CounterGroup extends Component {
   constructor(props) {
@@ -18,6 +19,18 @@ class CounterGroup extends Component {
     };
   }
 
+  componentDidMount() {
+    CounterApi.getCounterSize().then((response)=>{
+      const size = response.data.size.toString();
+      this.setState({number: size});
+      console.log(response);
+    })
+ /*   CounterApi.updateCounterSize(2).then((response)=>{
+      response.data.size = 5;
+      console.log(response.data.size);
+    }) */
+  } 
+
   initArray(number) {
     let size = this.props.size;
     if (number.length > 0) {
@@ -27,9 +40,14 @@ class CounterGroup extends Component {
   }
 
   onChange(event) {
+    const number = event.target.value;
     this.setState({
       number: event.target.value,
       sum: COUNTER_GROUP_INIT_SUM,
+    });
+    CounterApi.updateCounterSize({size:parseInt(number)}).then((response)=>{
+      console.log(response);
+      console.log("updated");
     });
   }
 
@@ -42,8 +60,8 @@ class CounterGroup extends Component {
   }
 
   render() {
-    const size = this.props.size;
     let counters = this.initArray(this.state.number);
+    console.log("render"+counters);
     return (
       <div>
         <form>

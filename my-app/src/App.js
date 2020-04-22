@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <CounterGroup size={0} />
+        <CounterGroup size={1}/>
       </header>
     </div>
   );
